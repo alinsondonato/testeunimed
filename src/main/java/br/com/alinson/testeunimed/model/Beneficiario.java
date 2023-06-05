@@ -32,7 +32,7 @@ public class Beneficiario {
 	private String nome;
 	
 	@NotEmpty(message = "{cpf.obrigatorio}")
-	@CPF(message = "{cpf.invalido}")
+	@CPF(message = "CPF Inválido")
 	private String cpf;
 	
 	@NotEmpty(message = "{email.obrigatorio}")

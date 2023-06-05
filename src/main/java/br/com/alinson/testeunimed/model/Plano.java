@@ -14,12 +14,16 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.With;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
+@With
 @Entity
 public class Plano {
 
@@ -35,6 +39,6 @@ public class Plano {
     
     @JsonIgnore
     @OneToMany(mappedBy = "plano")
-    private List<Beneficiario> beneficiario;
+    private List<Beneficiario> beneficiarios;
 
 }

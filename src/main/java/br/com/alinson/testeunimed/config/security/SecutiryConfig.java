@@ -2,6 +2,7 @@ package br.com.alinson.testeunimed.config.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -41,12 +42,14 @@ public class SecutiryConfig extends WebSecurityConfigurerAdapter {
         http
             .csrf().disable()
             .authorizeRequests()
+            	.antMatchers(HttpMethod.GET, "/h2-console/**").permitAll()
 	            .antMatchers("/beneficiarios/**").hasAnyRole("USER", "ADMIN")
 	            .antMatchers("/planos/**").hasAnyRole("USER", "ADMIN")
             .and()
             	.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         	.and()
-        		.addFilterBefore(jwtFilter(), UsernamePasswordAuthenticationFilter.class);
+        		.addFilterBefore(jwtFilter(), UsernamePasswordAuthenticationFilter.class).cors()
+    		.and().headers().frameOptions().sameOrigin();
         ;
     }
 }
